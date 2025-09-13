@@ -1,50 +1,86 @@
-# Welcome to your Expo app 👋
+# Fortum GreenPulse ⚡️
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Modern **Expo + React Native** app for live energy tracking, bill & CO₂e forecasting, and savings through goals & challenges. Built with **React Navigation** and **Firebase Phone Auth (OTP)**. Clean, reusable UI components.
 
-## Get started
+---
 
-1. Install dependencies
+## Demo
 
-   ```bash
-   npm install
-   ```
+Embed the repo video (auto‑play, muted). Put your file at `app/assets/fortum.mov`.
 
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```html
+<video width="100%" autoplay loop muted playsinline controls>
+  <source src="app/assets/fortum.mov" type="video/quicktime" />
+  <source src="docs/demo.mp4" type="video/mp4" />
+</video>
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+> Note: GitHub auto‑play depends on the browser’s media policy; keeping **muted** ensures it plays inline.
 
-## Learn more
+---
 
-To learn more about developing your project with Expo, look at the following resources:
+## Quick Start
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```bash
+npm install        
+```
 
-## Join the community
+1. **Enable Phone Auth** in Firebase Console.
+2. Create `app/firebase/firebaseApp.js` and initialize Firebase (API key, project id, etc.).
+3. Run the app:
 
-Join our community of developers creating universal apps.
+```bash
+npx expo start   
+```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+---
+
+## Highlights
+
+* **Live Usage:** real‑time kWh, cost, CO₂e
+* **Forecast:** month‑to‑date vs last month
+* **Goals & Routines:** weekday/weekend targets, gentle nudges
+* **Challenges & Groups:** private groups, badges, leaderboards
+* **Clean UI Kit:** `PrimaryButton`, `GhostButton`, `TextField`, `OtpInput`, `ProgressDots`
+
+---
+
+## Navigation & Screens
+
+* **Flows:** Onboarding → Auth → App Tabs
+* **Tabs:** Home, Live, Insights, Community, Settings
+
+```js
+
+navigation.getParent()?.navigate('AuthFlow', { screen: 'SignIn' });
+
+navigation.getParent()?.reset({ index: 0, routes: [{ name: 'AppTabs' }] });
+```
+
+---
+
+## Structure
+
+```txt
+app/
+  components/      # OnboardingSlide, auth, form, ui
+  firebase/        # firebaseApp.js, phoneAuth.js
+  navigation/      # AppNavigator.js
+  pages/
+    Onboarding/{GetStarted,Intro,LiveUsage,Savings}/
+    Auth/{SignIn,SignUp,ForgotPassword,VerificationCode,ResetPassword}/
+    {Home,Live,Insights,Community,Settings}/
+  styles/Color.js  # design tokens
+```
+
+---
+
+## Theming
+
+`app/styles/Color.js` centralizes palette (primary, accent `#257180`, background, text, etc.).
+
+---
+
+## License
+
+MIT
